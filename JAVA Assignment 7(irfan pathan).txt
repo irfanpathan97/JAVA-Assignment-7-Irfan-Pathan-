@@ -1,0 +1,250 @@
+1.Write a program to calculate the square value of any number given by the user .Add an exception handling block to check whether the user enter letters instead of numbers
+
+
+import java.util.Scanner;
+
+public class SquareCalculator {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.print("Enter a number to calculate its square: ");
+        
+        try {
+            String input = scanner.nextLine();
+            
+            double number = Double.parseDouble(input);
+            double square = number * number;
+            System.out.println("The square of " + number + " is " + square);
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input! Please enter a valid number.");
+        } finally {
+            scanner.close(); 
+        }
+    }
+}
+
+
+
+
+
+2.Create an integer array of size n and read the elements from the user .Add an exception handling block to print the value at nth position of the array
+
+
+
+
+import java.util.Scanner;
+
+public class ArrayElementRetriever {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        
+        System.out.print("Enter the size of the array: ");
+        int n = scanner.nextInt();
+        
+       
+        int[] array = new int[n];
+
+        
+        System.out.println("Enter " + n + " integers:");
+        for (int i = 0; i < n; i++) {
+            array[i] = scanner.nextInt();
+        }
+        
+        
+        System.out.print("Enter the index of the element you want to retrieve (0 to " + (n - 1) + "): ");
+        int index = scanner.nextInt();
+        
+        try {
+            
+            System.out.println("Value at index " + index + " is: " + array[index]);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            
+            System.out.println("Invalid index! Please enter a number between 0 and " + (n - 1) + ".");
+        } finally {
+            scanner.close(); 
+        }
+    }
+}
+
+
+
+3.Write a program to split a string containing two words using StringTokenizer without using hasMoreTokens() method and call nextToken() method three times.Add an exception handling block if necessary.
+
+
+
+
+import java.util.StringTokenizer;
+
+public class StringSplitter {
+    public static void main(String[] args) {
+        String input = "Hello World";
+
+        
+        StringTokenizer tokenizer = new StringTokenizer(input);
+
+        try {
+            
+            String firstToken = tokenizer.nextToken(); 
+            System.out.println("First token: " + firstToken);
+
+            String secondToken = tokenizer.nextToken(); 
+            System.out.println("Second token: " + secondToken);
+
+           
+            String thirdToken = tokenizer.nextToken(); 
+            System.out.println("Third token: " + thirdToken);
+        } catch (Exception e) {
+            
+            System.out.println("Error: " + e.getMessage());
+            System.out.println("You might be trying to access more tokens than available.");
+        }
+    }
+}
+
+
+
+4.Write a program to read a string and convert to integer using try catch block
+
+import java.util.Scanner;
+
+public class StringToIntegerConverter {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        
+        System.out.print("Enter a number as a string: ");
+        String input = scanner.nextLine();
+        
+        try {
+            
+            int number = Integer.parseInt(input);
+            System.out.println("The integer value is: " + number);
+        } catch (NumberFormatException e) {
+            
+            System.out.println("Invalid input! Please enter a valid integer.");
+        } finally {
+            scanner.close(); 
+        }
+    }
+}
+
+
+5.Write a JAVA program to create a method that takes a string as input and throws an exception if the string does not contain vowels.
+
+
+class NoVowelException extends Exception {
+    public NoVowelException(String message) {
+        super(message);
+    }
+}
+
+public class VowelChecker {
+    public static void main(String[] args) {
+        String input = "Sky"; 
+
+        try {
+            checkForVowels(input);
+            System.out.println("The string contains vowels.");
+        } catch (NoVowelException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    public static void checkForVowels(String str) throws NoVowelException {
+       
+        str = str.toLowerCase();
+        
+        
+        if (!str.contains("a") && !str.contains("e") && !str.contains("i") &&
+            !str.contains("o") && !str.contains("u")) {
+            throw new NoVowelException("The string does not contain any vowels.");
+        }
+    }
+}
+
+
+
+
+6.Write a program that creates a Calculator class.The class contains two variables of integer type. Design a constructor that accepts two values as parameter and set those values.
+
+Design four methods named Add(),Subtract(),multiply(),Division() for performing addition,subtraction,multiplication and division of two numbers.
+
+For addition and subtraction,two numbers should be positive.If any negative number is entered then throw an exception in respective methods.
+
+So design an exceptionhandler(ArithmeticException)in Add() and Subtract() methods respectively to check whether any number is negative or not.
+
+For division and multiplication two numbers should not be zero.If zero is entered for any number then throw an exception in respective methods.
+So design an exceptionhandler(ArithmeticException)inmultiply()andDivision()methods respectively to check whether any number is zero or not.
+
+Write a main class and declare four objects of Calculator class.Perform addition(objl),subtraction(obj2),multiply(obj3) and division(obj4) operations for these objects.
+If any non integer values are provided as input; then you should throw an exception(NumberFormatException)and display a message that informs the user of the wrong input before exiting
+
+
+class Calculator {
+    private int num1;
+    private int num2;
+
+    
+    public Calculator(int num1, int num2) {
+        this.num1 = num1;
+        this.num2 = num2;
+    }
+
+    
+    public int Add() throws ArithmeticException {
+        if (num1 < 0 || num2 < 0) {
+            throw new ArithmeticException("Both numbers must be positive for addition.");
+        }
+        return num1 + num2;
+    }
+
+    
+    public int Subtract() throws ArithmeticException {
+        if (num1 < 0 || num2 < 0) {
+            throw new ArithmeticException("Both numbers must be positive for subtraction.");
+        }
+        return num1 - num2;
+    }
+
+   
+    public int Multiply() throws ArithmeticException {
+        if (num1 == 0 || num2 == 0) {
+            throw new ArithmeticException("Neither number can be zero for multiplication.");
+        }
+        return num1 * num2;
+    }
+
+   
+    public double Division() throws ArithmeticException {
+        if (num1 == 0 || num2 == 0) {
+            throw new ArithmeticException("Neither number can be zero for division.");
+        }
+        return (double) num1 / num2;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        try {
+           
+            Calculator obj1 = new Calculator(5, 10);
+            Calculator obj2 = new Calculator(20, 15);
+            Calculator obj3 = new Calculator(3, 7);
+            Calculator obj4 = new Calculator(10, 2);
+
+            
+            System.out.println("Addition: " + obj1.Add());
+            System.out.println("Subtraction: " + obj2.Subtract());
+            System.out.println("Multiplication: " + obj3.Multiply());
+            System.out.println("Division: " + obj4.Division());
+
+        } catch (ArithmeticException e) {
+            System.out.println("Error: " + e.getMessage());
+        } catch (NumberFormatException e) {
+            System.out.println("Error: Invalid input. Please enter integers only.");
+        } catch (Exception e) {
+            System.out.println("An unexpected error occurred: " + e.getMessage());
+        }
+    }
+}
